@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./flight-details.component.css'],
 })
 export class FlightDetailsComponent {
+  isLoading: boolean = false;
   formFields = [
     { id: 'airline', label: 'Airline', type: 'text', required: true },
     { id: 'arrivalDate', label: 'Arrival Date', type: 'date', required: true },
@@ -34,6 +35,7 @@ export class FlightDetailsComponent {
       alert('Number of Guests should be at least 1.');
       return;
     }
+    this.isLoading = true; 
 
     const headers = new HttpHeaders({
       'token': 'WW91IG11c3QgYmUgdGhlIGN1cmlvdXMgdHlwZS4gIEJyaW5nIHRoaXMgdXAgYXQgdGhlIGludGVydmlldyBmb3IgYm9udXMgcG9pbnRzICEh',
@@ -45,9 +47,12 @@ export class FlightDetailsComponent {
         (response) => {
           alert('Request ' + (response ? 'successful' : 'failed'));
           flightForm.resetForm();
+          this.isLoading = false;
+          
         },
         (error) => {
           alert('Request failed: ' + error);
+          this.isLoading = false;
         }
       );
   }

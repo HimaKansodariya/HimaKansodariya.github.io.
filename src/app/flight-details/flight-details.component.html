@@ -1,0 +1,30 @@
+<div class="form-container">
+  <form #flightForm="ngForm" (ngSubmit)="submitForm(flightForm)">
+    <div *ngFor="let field of formFields" class="form-field">
+      <label for="{{ field.id }}">
+        {{ field.label
+        }}<span class="required-star" *ngIf="field.required">*</span>:</label
+      >
+      <input
+        type="{{ field.type }}"
+        id="{{ field.id }}"
+        name="{{ field.id }}"
+        S
+        ngModel
+        required="{{ field.required }}"
+        #fieldModel="ngModel"
+      />
+      <div
+        *ngIf="fieldModel.invalid && (fieldModel.dirty || fieldModel.touched)"
+        class="error"
+      >
+        <div *ngIf="fieldModel.errors?.['required']" class="error-message">
+          {{ field.label }} is required
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="submit-button">Submit</button>
+  </form>
+</div>
+
+<button (click)="logout()" class="logout-button">Logout</button>

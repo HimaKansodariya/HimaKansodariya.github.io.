@@ -1,0 +1,6 @@
+{
+  "routes": [
+    "/flight-details",
+    "/login"
+  ]
+}
